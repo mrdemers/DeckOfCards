@@ -2,8 +2,6 @@
 
 #include "RandomArrayShuffler.h"
 
-#include <exception>
-
 namespace appian
 {
 
