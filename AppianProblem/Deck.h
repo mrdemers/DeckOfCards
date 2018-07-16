@@ -1,6 +1,6 @@
 #pragma once
 
-#include "StandardPlayingCard.h"
+#include "Card.h"
 
 namespace appian
 {
@@ -8,7 +8,7 @@ namespace appian
 	{
 	public:
 		virtual void shuffle() = 0;
-		virtual StandardPlayingCard dealOneCard() = 0;
+		virtual Card* dealOneCard() = 0;
 
 		virtual int getNumCardsRemaining() = 0;
 	};
