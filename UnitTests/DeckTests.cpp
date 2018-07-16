@@ -28,10 +28,10 @@ namespace UnitTests
 		{
 			StandardDeck deck;
 
-			std::unique_ptr<StandardPlayingCard> card1(deck.dealOneCard());
-			std::unique_ptr<StandardPlayingCard> card2(deck.dealOneCard());
+			StandardPlayingCard card1 = deck.dealOneCard();
+			StandardPlayingCard card2 = deck.dealOneCard();
 
-			Assert::IsTrue(*card1 != *card2);
+			Assert::IsTrue(card1 != card2);
 			Assert::AreEqual(NUM_CARDS_IN_DECK - 2, deck.getNumCardsRemaining());
 		}
 
@@ -53,20 +53,24 @@ namespace UnitTests
 		TEST_METHOD(TestShuffleDeck)
 		{
 			StandardDeck deck;
-			std::unique_ptr<StandardPlayingCard> normalFirstCard(deck.dealOneCard());
+			StandardPlayingCard normalFirstCard = deck.dealOneCard();
 			discardNCards(deck, NUM_CARDS_IN_DECK - 2);
-			std::unique_ptr<StandardPlayingCard> normalLastCard(deck.dealOneCard());
+			StandardPlayingCard normalLastCard = deck.dealOneCard();
+
+			auto reverseCards = [](std::vector<StandardPlayingCard>::iterator start, std::vector<StandardPlayingCard>::iterator end) {
+				std::reverse(start, end);
+			};
 
 			StandardDeck newDeck;
-			newDeck.setShuffleAlgorithm(std::reverse<std::vector<std::unique_ptr<StandardPlayingCard>>::iterator>);
+			newDeck.setShuffleAlgorithm(reverseCards);
 			newDeck.shuffle();
 
-			std::unique_ptr<StandardPlayingCard> newFirstCard(newDeck.dealOneCard());
+			StandardPlayingCard newFirstCard = newDeck.dealOneCard();
 			discardNCards(newDeck, NUM_CARDS_IN_DECK - 2);
-			std::unique_ptr<StandardPlayingCard> newLastCard(newDeck.dealOneCard());
+			StandardPlayingCard newLastCard = newDeck.dealOneCard();
 
-			Assert::IsTrue(*newFirstCard == *normalLastCard);
-			Assert::IsTrue(*newLastCard == *normalFirstCard);
+			Assert::IsTrue(newFirstCard == normalLastCard);
+			Assert::IsTrue(newLastCard == normalFirstCard);
 		}
 
 		TEST_METHOD(TestShuffleRandomlyCompletesSuccessfully)
@@ -82,8 +86,7 @@ namespace UnitTests
 		{
 			StandardDeck deck;
 
-			//Create a reference to shuffle with the random seed set to 100
-			auto shuffleFunction = std::bind(RandomArrayShuffler::shuffleSeeded<std::vector<std::unique_ptr<StandardPlayingCard>>::iterator>, _1, _2, 100);
+			auto shuffleFunction = std::bind(RandomArrayShuffler::shuffleSeeded<std::vector<StandardPlayingCard>::iterator>, _1, _2, 100);
 			deck.setShuffleAlgorithm(shuffleFunction);
 			deck.shuffle();
 
@@ -91,17 +94,17 @@ namespace UnitTests
 			srand(100);
 			auto posOfBottomCard = rand() % NUM_CARDS_IN_DECK;
 			discardNCards(referenceDeck, NUM_CARDS_IN_DECK - posOfBottomCard - 1);
-			std::unique_ptr<StandardPlayingCard> expectedLastCard(referenceDeck.dealOneCard());
+			StandardPlayingCard expectedLastCard = referenceDeck.dealOneCard();
 
 			discardNCards(deck, NUM_CARDS_IN_DECK - 1);
-			std::unique_ptr<StandardPlayingCard> lastCard(deck.dealOneCard());
+			StandardPlayingCard lastCard = deck.dealOneCard();
 
-			Assert::IsTrue(*lastCard == *expectedLastCard);
+			Assert::IsTrue(lastCard == expectedLastCard);
 		}
 
 		void discardNCards(StandardDeck& deck, int numToDeal) {
 			for (int i = 0; i < numToDeal; i++) {
-				std::unique_ptr<StandardPlayingCard> toBeDeleted(deck.dealOneCard());
+				deck.dealOneCard();
 			}
 		}
 	};
