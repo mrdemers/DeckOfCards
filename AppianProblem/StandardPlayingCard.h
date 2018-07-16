@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Card.h"
-
 namespace appian
 {
-	class StandardPlayingCard : public Card
+	class StandardPlayingCard
 	{
 	public:
 
@@ -28,7 +26,7 @@ namespace appian
 			Ten,
 			Jack,
 			Queen,
-			King
+			King,
 		};
 
 		StandardPlayingCard(Suit suit, Face face);

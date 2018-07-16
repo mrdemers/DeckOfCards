@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 
 #include <vector>
+#include <array>
 #include "RandomArrayShuffler.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -12,26 +13,6 @@ namespace UnitTests
 	TEST_CLASS(TestShuffler)
 	{
 	public:
-		TEST_METHOD(TestIterators)
-		{	
-			std::vector<int> v;
-			v.push_back(1);
-			v.push_back(2);
-			v.push_back(4);
-
-			auto first = v.begin();
-			auto second = v.begin() + 1;
-
-			std::iter_swap(first, second);
-
-			auto start = v.begin();
-			Assert::AreEqual(2, v[0]);
-			start++;
-			Assert::AreEqual(1, v[1]);
-			start++;
-			Assert::AreEqual(4, *start);
-		}
-
 		TEST_METHOD(TestShuffle)
 		{
 			std::vector<int> v;
@@ -56,6 +37,15 @@ namespace UnitTests
 
 			std::vector<int> expected = { 4, 5, 3, 6, 7, 0, 2, 9, 8, 1 };
 			Assert::IsTrue(v == expected);
+		}
+
+		TEST_METHOD(TestShuffleNonVector)
+		{
+			std::array<int, 10> arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+			RandomArrayShuffler::shuffleSeeded(arr.begin(), arr.end(), 1000);
+			std::array<int, 10> expected = { 4, 5, 3, 6, 7, 0, 2, 9, 8, 1 };
+
+			Assert::IsTrue(arr == expected);
 		}
 	};
 }

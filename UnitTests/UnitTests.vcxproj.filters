@@ -26,16 +26,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DeckTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CardTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShuffleTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InheritanceTest.cpp">
+    <ClCompile Include="StandardDeckTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -27,15 +27,15 @@
     <ClInclude Include="RandomArrayShuffler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Card.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StandardDeck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StandardPlayingCard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

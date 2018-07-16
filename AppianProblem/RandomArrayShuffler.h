@@ -19,8 +19,8 @@ namespace appian
 			srand(seed);
 			int length = end - start;
 			for (int i = 0; i < length; i++) {
-				int remaining = length - i;
-				int swapOffset = rand() % remaining;
+				int remainingElements = length - i;
+				int swapOffset = rand() % remainingElements;
 				auto toSwap = start + i;
 				std::iter_swap(toSwap, toSwap + swapOffset);
 			}

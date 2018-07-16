@@ -2,14 +2,33 @@
 
 #include "StandardPlayingCard.h"
 
+#include <vector>
+#include <functional>
+
 namespace appian
 {
 	class Deck
 	{
+	using Itr = std::vector<StandardPlayingCard>::iterator;
 	public:
-		virtual void shuffle() = 0;
-		virtual StandardPlayingCard dealOneCard() = 0;
+		virtual ~Deck() {}
+		Deck(const Deck& other) = default;
+		Deck(Deck&& other) = default;
+		Deck& operator=(const Deck& other) = default;
+		Deck& operator=(Deck&& other) = default;
 
-		virtual int getNumCardsRemaining() = 0;
+		void shuffle();
+		StandardPlayingCard dealOneCard();
+		int getNumCardsRemaining();
+
+		void setShuffleAlgorithm(std::function<void(Itr, Itr)> newAlgorithm);
+
+	protected:
+		Deck();
+		void addCard(const StandardPlayingCard& card);
+
+	private:
+		std::vector<StandardPlayingCard> cards;
+		std::function<void(Itr, Itr)> shuffleFunction;
 	};
 }
