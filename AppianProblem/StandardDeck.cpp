@@ -1,7 +1,8 @@
 #include "StandardDeck.h"
 
-#include <exception>
 #include "RandomArrayShuffler.h"
+
+#include <exception>
 
 namespace appian
 {

@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
+#include "RandomArrayShuffler.h"
+
 #include <vector>
 #include <array>
-#include "RandomArrayShuffler.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace appian;
