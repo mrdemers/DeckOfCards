@@ -23,7 +23,7 @@ void Deck::shuffle()
 
 StandardPlayingCard Deck::dealOneCard()
 {
-	if (cards.size() == 0)
+	if (getNumCardsRemaining() == 0)
 		throw std::out_of_range("No cards remaining");
 
 	StandardPlayingCard card = cards.back();
